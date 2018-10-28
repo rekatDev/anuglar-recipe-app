@@ -1,0 +1,24 @@
+.recipe-list {
+  margin-top: 20px;
+}
+
+.card {
+  padding: 8px;
+
+  .card-image-container{
+    overflow:hidden;
+    .card-image {
+      width: 100%;
+      margin: 8px auto;
+      transition: all .5s;
+
+      border-radius: 3px;
+      &:hover{
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+
+

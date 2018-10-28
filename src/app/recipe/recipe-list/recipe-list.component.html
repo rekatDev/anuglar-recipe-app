@@ -1,0 +1,27 @@
+<section class="recipe-list">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-xl-4 col-md-6 col-sm-12" *ngFor="let recipe of recipes">
+        <div class="card">
+          <div class="card-image-container card-img-top">
+            <img class="card-image" mat-card-image [src]="recipe.imgPath" (click)="onDetailClick(recipe._id)">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{recipe.title}}</h5>
+            <p class="card-text">{{recipe.description}}</p>
+          </div>
+        </div>
+        <!-- <mat-card class="card">
+          <div class="card-image-container">
+            <img class="card-image" mat-card-image [src]="recipe.imgPath" (click)="onDetailClick(recipe._id)">
+          </div>
+          <mat-card-header class="testing-this">
+            <mat-card-title>{{recipe.title}}</mat-card-title>
+            <mat-card-subtitle class="testing">{{recipe.description}}</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card> -->
+      </div>
+    </div>
+  </div>
+</section>

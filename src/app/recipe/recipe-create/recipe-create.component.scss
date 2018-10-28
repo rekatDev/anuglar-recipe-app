@@ -1,0 +1,153 @@
+.wrapper {
+  position: relative;
+  background-color: transparent;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+
+  &::after {
+    content: "";
+    background-image: url("https://deutsches-obst-und-gemuese.de/wp-content/uploads/2017/05/BVEO_MoehrenKarotten_cshutterstock5SecondStudio.png");
+    background-size: cover;
+    opacity: 0.15;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+  }
+}
+
+.recipe-form {
+  position: relative;
+
+  display: flex;
+
+  .left-column {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .right-column {
+    flex-direction: row;
+    display: flex;
+  }
+}
+
+.detail__content {
+  width: 100%;
+  padding: 2rem;
+  margin-top: 2rem;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+
+  .detail__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+}
+
+.img-container{
+  position: relative;
+  width: 100%;
+  border-radius: 3px;
+
+  .recipe__image {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top:0;
+    left:0;
+  }
+
+  .img-picker {
+
+    &--edit {
+      position: absolute;
+      display: inline;
+      top: 1rem;
+      right: 1rem;
+      z-index: 10;
+    }
+
+    &--create {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    &__button--edit {
+      background-color: #59b259;
+      color: white;
+      font-size: 1.2rem;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 0.3rem;
+    }
+  }
+}
+
+
+
+.img-placeholder.ng-invalid.ng-touched {
+  border: red 3px dashed;
+}
+.img-placeholder {
+  position: relative;
+
+  border: lightgray 3px dashed;
+  width: 100%;
+  border-radius: 3px;
+}
+.img-placeholder:before {
+  content: "";
+  display: block;
+  padding-top: 80%;
+}
+
+.ingredient {
+  width: 100%;
+  display: flex;
+  margin-bottom: 1rem;
+
+  &__item {
+    width: 90%;
+  }
+  &__button {
+    position: relative;
+    background-color: red;
+    color: white;
+    padding: 1.5rem;
+    width: 10%;
+    border: none;
+
+    border-radius: 0.3rem;
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
+}
+
+.submit-button {
+  justify-content: flex-end;
+  display: flex;
+}
+
+// .required::after {
+//   position: absolute;
+//   // top: 50%;
+//   // transform: translateX(-50%) translateY(-50%);
+//   content: " *";
+//   color: red;
+//   right: 0px;
+// }
+
+
+
+.full-width {
+  width: 100%;
+}

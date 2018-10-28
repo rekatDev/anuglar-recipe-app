@@ -1,0 +1,15 @@
+<div class="detail-container container">
+  <div class="image-content">
+    <img class="image" src="{{selectedRecipe?.imgPath}}">
+  </div>
+  <h1>{{selectedRecipe?.title}}</h1>
+  <hr>
+  <h2>Ingredients</h2>
+  <p *ngFor="let ingredient of selectedRecipe?.ingredients">
+    {{ingredient.name}}
+  </p>
+  <div class="detail__controls" *ngIf="selectedRecipe?._creator === authService.getUserId()">
+    <button type="button" (click)="onEditClick()">Edit</button>
+    <button type="button" (click)="onDeleteClick()">Delete</button>
+  </div>
+</div>

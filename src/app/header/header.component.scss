@@ -1,0 +1,59 @@
+.navi {
+  background-image: radial-gradient(circle, #59b931, #4daa27, #419c1d, #358d13, #297f06);
+  // height: 5.6rem;
+  display:flex;
+  align-items: center;
+
+  .container {
+    display: flex;
+    align-items: center;
+  }
+
+
+  .logo-content {
+    padding: 0 15px;
+  }
+
+  .navig-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    ul {
+      margin:0;
+      list-style: none;
+      display: flex;
+
+      li{
+        margin: 0 1.5rem;
+        color:white;
+
+        &.active {
+          border-bottom: 3px solid black;
+          a {
+            &,
+            &:link,
+            &:visited {
+            color: black;
+            }
+          }
+        }
+        a {
+          &,
+          &:link,
+          &:visited {
+            text-decoration: none;
+            text-transform: uppercase;
+            color: white;
+            cursor: pointer;
+            display:block;
+            height: 5.6rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 5.6rem;
+          }
+      }
+    }
+    }
+  }
+}

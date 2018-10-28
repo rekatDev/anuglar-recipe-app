@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+        <div class="form__group">
+          <input id="login-email" class="form__input" type="email" name="email" ngModel #emailInput="ngModel" required
+            email placeholder=" " />
+          <label for="login-email" class="form__label">Email</label>
+        </div>
+        <div class="form__group">
+          <input id="login-password" class="form__input" type="password" name="password" ngModel #passwordInput="ngModel"
+            required placeholder=" " />
+          <label for="login-password" class="form__label">Password</label>
+        </div>
+        <div class="button-container">
+          <button class="submit-button" type="submit">Login</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

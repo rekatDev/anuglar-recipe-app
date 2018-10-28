@@ -1,0 +1,26 @@
+.image {
+  width: 100%;
+}
+
+.container{
+  padding: 10px;
+  margin: 20px auto;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .container {
+    width: 60%;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .container {
+    width: 60%;
+  }
+}

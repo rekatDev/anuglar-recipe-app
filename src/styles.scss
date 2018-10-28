@@ -1,0 +1,151 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+@import "./../my-theme.scss";
+// @import "~bootstrap/scss/bootstrap-reboot";
+
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap-grid";
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  background-color: #f7f7f7;
+  line-height: 1.7;
+  // padding: 3rem;
+}
+
+
+.form {
+  position: relative;
+
+  &__group {
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+
+    &--flex {
+      display: flex;
+    }
+  }
+
+  // &__label {
+  //   font-size: 1.2rem;
+  //   font-weight: 700;
+  //   position:absolute;
+  //   top: -20px;
+  //   left: 2rem;
+  //   transition: .5s ease-in-out;
+  // }
+
+  &__label {
+    font-size: 1.5rem;
+    font-weight: 700;
+    position: absolute;
+    top: 1.5rem;
+    color: lightgray;
+    padding-left: 1.5rem;
+    transition: 0.25s ease;
+    cursor: text;
+  }
+
+  &__input[required] {
+    // border-right: 2px solid red;
+  }
+  &__input.ng-invalid.ng-touched {
+    border: 0.1rem solid red;
+    ~ label {
+      color: red;
+    }
+  }
+
+  &__input.ng-invalid:focus {
+    border: 0.1rem solid red;
+    ~ label {
+      color: red;
+    }
+  }
+
+  &__input.ng-valid.ng-touched {
+    // border-bottom: 0.3rem solid green;
+  }
+  // &__input:placeholder-shown + &__label {
+  //   opacity: 0;
+  //   visibility: hidden;
+  //   transition: .5s ease-in-out;
+  //   top: 7px;
+  // }
+
+  &__input {
+    position: relative;
+    font-family: inherit;
+    font-size: 1.5rem;
+
+    padding: 0 1.5rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    color: inherit;
+    border-bottom-left-radius: 0.2rem;
+    background-color: white;
+    border: none;
+    border-bottom: 0.3rem solid transparent;
+    border: 0.1rem solid lightgrey;
+    width: 100%;
+    display: block;
+    transition: all 0.3s;
+
+    &:not(:placeholder-shown) {
+      ~ label {
+        top: 2px;
+        // color: #2196f3;
+        font-size: 1.2rem;
+      }
+    }
+
+    &:focus {
+      ~ label {
+        top: 2px;
+        color: #2196f3;
+        font-size: 1.2rem;
+
+        & > .required {
+          color: rgba(red, 0.4);
+        }
+      }
+
+      outline: none;
+      border: 0.1rem solid #2196f3;
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+      // border-bottom: 0.3rem solid teal;
+
+      &:invalid {
+        // border-bottom: 0.3rem solid red;
+      }
+    }
+
+    &--button {
+      border: none;
+      border-bottom-right-radius: 0.2rem;
+      background-color: #59b259;
+      padding: 1rem 1.5rem;
+      color: white;
+      font-size: 1.5rem;
+    }
+  }
+}
