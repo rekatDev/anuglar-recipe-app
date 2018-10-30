@@ -8,13 +8,14 @@
         <ul>
           <!-- <li><a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li> -->
           <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="">Recipes</a></li>
-          <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a *ngIf="isAuth" routerLink="recipes/create" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Create</a></li>
+          <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a *ngIf="isAuth" routerLink="recipes/create"
+              routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Create</a></li>
         </ul>
       </div>
       <div class="nav-right-content">
         <ul>
-          <li><a *ngIf="!isAuth" routerLink="login" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Login</a></li>
-          <li><a *ngIf="!isAuth" routerLink="signup" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Signup</a></li>
+          <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a *ngIf="!isAuth" routerLink="login">Login</a></li>
+          <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a *ngIf="!isAuth" routerLink="signup">Signup</a></li>
           <li><a *ngIf="isAuth" (click)="onLogout()">Logout</a></li>
         </ul>
       </div>

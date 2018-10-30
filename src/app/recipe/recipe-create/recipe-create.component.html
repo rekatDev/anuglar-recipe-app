@@ -43,9 +43,7 @@
             </div>
           </div>
         </div>
-        <div class="submit-button">
-          <button mat-stroked-button color="accent" type="submit">Submit</button>
-        </div>
+
       </div>
       <div class="right-column col-md-6 col-xs-12">
         <div class="img-container" *ngIf="previewImage && recipeFormGroup.get('image').valid">
@@ -65,6 +63,12 @@
           </div>
         </div>
       </div>
+      <div class="col-md-6 col-xs-12">
+        <div class="submit-button mt-3">
+          <button mat-stroked-button color="accent" type="submit">Submit</button>
+        </div>
+      </div>
+
     </form>
   </div>
 </div>
