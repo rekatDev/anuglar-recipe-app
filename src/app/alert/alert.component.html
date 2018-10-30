@@ -1,0 +1,7 @@
+
+<div class="error-box" [ngClass]="{'alert-danger': errorObject?.type === 'error'}" *ngIf="errorShow">
+  <div class="container error-container d-flex">
+    <p class="error-text"> {{errorObject?.message}}</p>
+    <button type="button" class="error-close" [ngClass]="{'alert-danger': errorObject?.type === 'error'}" (click)="errorShow = !errorShow">X</button>
+  </div>
+</div>

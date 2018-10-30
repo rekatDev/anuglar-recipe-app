@@ -1,6 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-6 mx-auto mt-3">
+
+      <h1 class="text-center">Signup</h1>
+      <app-alert></app-alert>
       <form class="form" (submit)="onSignup(singupForm)" #singupForm="ngForm">
         <div class="form__group">
           <input id="signup-email" class="form__input" type="email" name="email" ngModel #emailInput="ngModel" required

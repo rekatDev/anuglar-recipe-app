@@ -3,15 +3,20 @@ import { HttpClient } from '@angular/common/http';
 import { AuthData } from './auth.model';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { map, first } from 'rxjs/operators';
+import { AlertService } from '../alert/alert.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-
   private authStatusListener = new Subject<boolean>();
   private token: string = null;
   private userId: string;
   private isAuth = false;
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private alertSerivce: AlertService
+  ) {}
 
   createUser(email, password) {
     const authData: AuthData = {
@@ -19,15 +24,15 @@ export class AuthService {
       password
     };
 
-    this.http
-      .post('http://localhost:3000/users', authData)
-      .subscribe(res => {
-        console.log(res);
+    this.http.post('http://localhost:3000/users', authData).subscribe(
+      res => {
         this.router.navigate(['/login']);
-      }, err => {
-        console.log(err);
+      },
+      err => {
+        this.alertSerivce.errorMessage(err);
         this.authStatusListener.next(false);
-      });
+      }
+    );
   }
 
   login(email, password) {
@@ -37,22 +42,33 @@ export class AuthService {
     };
 
     this.http
-      .post('http://localhost:3000/users/login', authData, {observe: 'response'})
-      .subscribe(res => {
-        const body = <{token: string,
-          user: {
-          _id: string,
-          email: string
-      }}>res.body;
-        this.token = body.token;
-        this.userId = body.user._id;
-        this.saveAuthData(this.token, this.userId);
-        this.isAuth = true;
-        this.authStatusListener.next(true);
-        this.router.navigate(['/']);
-      }, err => {
-        this.authStatusListener.next(false);
-      });
+      .post('http://localhost:3000/users/login', authData, {
+        observe: 'response'
+      })
+      .subscribe(
+        res => {
+          const body = <
+            {
+              token: string;
+              user: {
+                _id: string;
+                email: string;
+              };
+            }
+          >res.body;
+          this.token = body.token;
+          this.userId = body.user._id;
+          this.saveAuthData(this.token, this.userId);
+          this.isAuth = true;
+          this.router.navigate(['/']);
+          this.authStatusListener.next(true);
+          return res;
+        },
+        err => {
+          this.alertSerivce.errorMessage(err);
+          this.authStatusListener.next(false);
+        }
+      );
   }
   logout() {
     this.http.delete('http://localhost:3000/users/me/token').subscribe(res => {
@@ -61,6 +77,7 @@ export class AuthService {
       this.token = null;
       this.isAuth = false;
       this.authStatusListener.next(false);
+      this.router.navigate(['/']);
     });
   }
 
@@ -91,20 +108,20 @@ export class AuthService {
   }
 
   autoAuth() {
-   const authData = this.getAuthData();
+    const authData = this.getAuthData();
 
-   if (!authData) {
-     return;
-   }
+    if (!authData) {
+      return;
+    }
 
-   console.log(authData);
-   this.token = authData.token;
-   this.userId = authData.userId;
+    console.log(authData);
+    this.token = authData.token;
+    this.userId = authData.userId;
 
-   this.isAuth = true;
-   this.authStatusListener.next(true);
+    this.isAuth = true;
+    this.authStatusListener.next(true);
 
-   console.log(this.isAuth);
+    console.log(this.isAuth);
   }
 
   private getAuthData() {

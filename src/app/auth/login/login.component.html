@@ -1,6 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-6 mx-auto mt-3">
+      <h1 class="text-center">Login</h1>
+      <app-alert></app-alert>
       <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
         <div class="form__group">
           <input id="login-email" class="form__input" type="email" name="email" ngModel #emailInput="ngModel" required
@@ -15,7 +17,6 @@
         <div class="button-container">
           <button class="submit-button" type="submit">Login</button>
         </div>
-
       </form>
     </div>
   </div>

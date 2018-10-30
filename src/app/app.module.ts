@@ -8,13 +8,21 @@ import { RecipeDetailComponent } from './recipe/recipe-detail/recipe-detail.comp
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatToolbarModule, MatCardModule, MatFormField, MatInputModule, MatButtonModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  MatToolbarModule,
+  MatCardModule,
+  MatFormField,
+  MatInputModule,
+  MatButtonModule
+} from '@angular/material';
 import { AppRouting } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { RecipeCreateComponent } from './recipe/recipe-create/recipe-create.component';
+import { ErrorInterceptor } from './error-interceptor';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +33,8 @@ import { RecipeCreateComponent } from './recipe/recipe-create/recipe-create.comp
     RecipeEditComponent,
     LoginComponent,
     SignupComponent,
-    RecipeCreateComponent
+    RecipeCreateComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -41,11 +50,16 @@ import { RecipeCreateComponent } from './recipe/recipe-create/recipe-create.comp
   ],
   providers: [
     {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }
-],
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

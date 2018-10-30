@@ -1,0 +1,22 @@
+.error-box {
+  padding: 1.5rem 2rem;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+.error-container {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+}
+
+.error-close {
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: transparent;
+  border: none;
+}
+
+.error-text {
+  font-size: 1.4rem;
+  margin: 0;
+}
