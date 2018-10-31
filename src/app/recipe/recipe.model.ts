@@ -6,5 +6,6 @@ export interface Recipe {
   description: string;
   imgPath: string;
   ingredients: Ingredient[];
-  _creator: string;
+  createdBy: string;
+  creatorId: string;
 }

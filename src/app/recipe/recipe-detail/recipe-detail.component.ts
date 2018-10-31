@@ -30,7 +30,8 @@ export class RecipeDetailComponent implements OnInit {
             description: recipe.description,
             imgPath: recipe.imgPath,
             ingredients: recipe.ingredients,
-            _creator: recipe._creator
+            createdBy: recipe._creator.username,
+            creatorId: recipe._creator._id
           };
         });
         // this.selectedRecipe = this.recipeService.getById(id);

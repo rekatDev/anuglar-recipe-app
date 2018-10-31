@@ -6,6 +6,11 @@
       <app-alert></app-alert>
       <form class="form" (submit)="onSignup(singupForm)" #singupForm="ngForm">
         <div class="form__group">
+          <input id="signup-username" class="form__input" type="text" name="username" ngModel #userInput="ngModel"
+            required placeholder=" " />
+          <label for="signup-username" class="form__label">Username</label>
+        </div>
+        <div class="form__group">
           <input id="signup-email" class="form__input" type="email" name="email" ngModel #emailInput="ngModel" required
             email placeholder=" " />
           <label for="signup-email" class="form__label">Email</label>

@@ -79,7 +79,8 @@ export class RecipeService {
         description,
         ingredients,
         imgPath: image,
-        _creator: null
+        createdBy: null,
+        creatorId: null,
       };
     }
     this.http
@@ -90,9 +91,15 @@ export class RecipeService {
   }
 
   deleteRecipe(id: string) {
-    this.http.delete('http://localhost:3000/recipes/' + id).subscribe(res => {
-      this.router.navigate(['recipes']);
-    });
+    this.http.delete('http://localhost:3000/recipes/' + id).subscribe(
+      res => {
+        this.router.navigate(['recipes']);
+      },
+      err => {
+        // Display error message!
+        this.router.navigate(['recipes']);
+      }
+    );
   }
 
   getRecipes() {
@@ -107,12 +114,13 @@ export class RecipeService {
                 title: recipe.title,
                 description: recipe.description,
                 imgPath: recipe.imgPath,
+                createdBy: recipe._creator.username,
+                creatorId: recipe._creator._id,
                 ingredients: recipe.ingredients.map(ingredient => {
                   return {
                     name: ingredient.name
                   };
-                }),
-                _creator: recipe._creator
+                })
               };
             })
           };
@@ -125,14 +133,7 @@ export class RecipeService {
   }
 
   getById(id: string) {
-    return this.http.get<{
-      _id: string;
-      title: string;
-      description: string;
-      imgPath: string;
-      ingredients: Ingredient[];
-      _creator: string;
-    }>('http://localhost:3000/recipes/' + id);
+    return this.http.get<any>('http://localhost:3000/recipes/' + id);
   }
 
   getRecipeUpdate() {

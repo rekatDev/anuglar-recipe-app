@@ -1,15 +1,20 @@
-<div class="detail-container container">
-  <div class="image-content">
-    <img class="image" src="{{selectedRecipe?.imgPath}}">
-  </div>
-  <h1>{{selectedRecipe?.title}}</h1>
-  <hr>
-  <h2>Ingredients</h2>
-  <p *ngFor="let ingredient of selectedRecipe?.ingredients">
-    {{ingredient.name}}
-  </p>
-  <div class="detail__controls" *ngIf="selectedRecipe?._creator === authService.getUserId()">
-    <button type="button" (click)="onEditClick()">Edit</button>
-    <button type="button" (click)="onDeleteClick()">Delete</button>
+<div class="container">
+  <div class="row">
+    <div class="detail-container col-lg-8 cool-lg-offset-4 col-md-12 mx-auto">
+      <div class="image-content">
+        <img class="image" src="{{selectedRecipe?.imgPath}}">
+      </div>
+      <h1 class="title">{{selectedRecipe?.title}}</h1>
+      <h5 class="text-muted" *ngIf="selectedRecipe?.createdBy">Created By: {{selectedRecipe?.createdBy}}</h5>
+      <hr class="mt-5 mb-5">
+      <h2>Ingredients</h2>
+      <p *ngFor="let ingredient of selectedRecipe?.ingredients">
+        {{ingredient.name}}
+      </p>
+      <div class="detail__controls" *ngIf="selectedRecipe?.creatorId === authService.getUserId()">
+        <button type="button" (click)="onEditClick()">Edit</button>
+        <button type="button" (click)="onDeleteClick()">Delete</button>
+      </div>
+    </div>
   </div>
 </div>

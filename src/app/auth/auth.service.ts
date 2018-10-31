@@ -18,8 +18,9 @@ export class AuthService {
     private alertSerivce: AlertService
   ) {}
 
-  createUser(email, password) {
+  createUser(email, password, username) {
     const authData: AuthData = {
+      username,
       email,
       password
     };
@@ -37,6 +38,7 @@ export class AuthService {
 
   login(email, password) {
     const authData: AuthData = {
+      username: null,
       email,
       password
     };

@@ -9,7 +9,9 @@
           </div>
           <div class="card-body">
             <h5 class="card-title">{{recipe.title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted" *ngIf="recipe.createdBy">Created by: {{recipe.createdBy}}</h6>
             <p class="card-text">{{recipe.description}}</p>
+            <p> </p>
           </div>
         </div>
         <!-- <mat-card class="card">

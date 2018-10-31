@@ -47,19 +47,19 @@
       </div>
       <div class="right-column col-md-6 col-xs-12">
         <div class="img-container" *ngIf="previewImage && recipeFormGroup.get('image').valid">
-          <div class="img-picker img-picker--edit">
-            <button class="img-picker__button--edit" type="button" (click)="filePicker.click()">Edit</button>
-            <input style="display:none" type="file" #filePicker (change)="onImageSelected($event)">
-          </div>
+          <button class="img-picker__button--edit" type="button" (click)="filePicker.click()">Edit</button>
+          <input style="display:none" type="file" #filePicker (change)="onImageSelected($event)">
           <img class="recipe__image" [src]="previewImage" [alt]="recipeFormGroup.value.title" type="text">
+
         </div>
-        <div class="img-container" *ngIf="!(previewImage && recipeFormGroup.get('image').valid)">
+        <div class="img-container img-container--preview" *ngIf="!(previewImage && recipeFormGroup.get('image').valid)">
           <div [ngClass]="{'ng-invalid': recipeFormGroup.get('image').invalid, 'ng-touched': submitted || imageSelected}"
             class="img-placeholder">
-            <div class="img-picker img-picker--create">
-              <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
-              <input style="display:none" type="file" #filePicker (change)="onImageSelected($event)">
-            </div>
+
+            <button mat-stroked-button type="button" class="img-picker__button--create" (click)="filePicker.click()">Pick
+              Image</button>
+            <input style="display:none" type="file" #filePicker (change)="onImageSelected($event)">
+
           </div>
         </div>
       </div>

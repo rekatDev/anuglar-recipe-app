@@ -48,8 +48,11 @@
 
 .img-container{
   position: relative;
-  width: 100%;
   border-radius: 3px;
+
+  &--preview {
+    width: 100%;
+  }
 
   .recipe__image {
     max-width: 100%;
@@ -57,23 +60,33 @@
   }
 
   .img-picker {
+    // &--edit {
+    //   position: absolute;
+    //   display: inline;
+    //   top: 1rem;
+    //   right: 1rem;
+    //   z-index: 10;
+    // }
 
-    &--edit {
-      position: absolute;
-      display: inline;
-      top: 1rem;
-      right: 1rem;
-      z-index: 10;
-    }
+    // &--create {
+    //   position: absolute;
+    //   top: 50%;
+    //   left: 50%;
+    //   transform: translateX(-50%) translateY(-50%);
+    // }
 
-    &--create {
+    &__button--create {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translateX(-50%) translateY(-50%);
     }
-
     &__button--edit {
+         position: absolute;
+      display: inline;
+      top: 1rem;
+      right: 1rem;
+      z-index: 10;
       background-color: #59b259;
       color: white;
       font-size: 1.2rem;
