@@ -115,33 +115,6 @@
   padding-top: 80%;
 }
 
-.ingredient {
-  width: 100%;
-  display: flex;
-  margin-bottom: 1rem;
-
-  &__item {
-    width: 90%;
-  }
-  &__button {
-    position: relative;
-    background-color: red;
-    color: white;
-    padding: 1.5rem;
-    width: 10%;
-    border: none;
-
-    border-radius: 0.3rem;
-
-    span {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translateX(-50%) translateY(-50%);
-    }
-  }
-}
-
 .submit-button {
   justify-content: flex-end;
   display: flex;

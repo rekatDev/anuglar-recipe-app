@@ -18,6 +18,7 @@ import { indexDebugNode } from '@angular/core/src/debug/debug_node';
 import { ValidationService } from 'src/app/validation.service';
 import { Recipe } from '../recipe.model';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Ingredient } from '../ingredient.model';
 
 @Component({
   selector: 'app-recipe-create',
@@ -29,6 +30,8 @@ export class RecipeCreateComponent implements OnInit {
   recipeFormGroup: FormGroup;
   submitted = false;
   imageSelected = false;
+
+  ingredients: Ingredient[] = [];
 
   mode = 'create';
   private recipeId: string;
@@ -57,9 +60,9 @@ export class RecipeCreateComponent implements OnInit {
     this.imageSelected = true;
   }
 
-  get ingredients() {
-    return this.recipeFormGroup.get('ingredients') as FormArray;
-  }
+  // get ingredients() {
+  //   return this.recipeFormGroup.get('ingredients') as FormArray;
+  // }
 
   onSave() {
     if (this.recipeFormGroup.invalid) {
@@ -68,35 +71,46 @@ export class RecipeCreateComponent implements OnInit {
       return;
     }
     if (this.mode === 'create') {
-      this.recipeService.addRecipe(this.recipeFormGroup.value);
+      this.recipeService.addRecipe(
+        this.recipeFormGroup.value.title,
+        this.recipeFormGroup.value.description,
+        this.ingredients,
+        this.recipeFormGroup.value.image
+      );
     } else {
       this.recipeService.editRecipe(
         this.recipeId,
         this.recipeFormGroup.value.title,
         this.recipeFormGroup.value.description,
-        this.recipeFormGroup.value.ingredients,
+        this.ingredients,
         this.recipeFormGroup.value.image
       );
     }
   }
 
-  onAddIngredient(ingredientField) {
-    this.addIngredient(ingredientField.value);
-    ingredientField.value = '';
-  }
-
-  private addIngredient(value: string) {
-    this.ingredients.push(
-      this.fb.group({
-        name: [value, Validators.required]
-      })
-    );
+  onAddIngredient(ingredident) {
+    this.ingredients.push(ingredident);
+    // this.addIngredient(ingredientField.value);
+    // ingredientField.value = '';
   }
 
   onRemoveIngredient(ingredient) {
-    const index = this.ingredients.value.findIndex(i => ingredient === i);
-    this.ingredients.removeAt(index);
+    const delIdx = this.ingredients.findIndex(i => i === ingredient);
+    this.ingredients.splice(delIdx);
   }
+
+  // private addIngredient(value: string) {
+  //   this.ingredients.push(
+  //     this.fb.group({
+  //       name: [value, Validators.required]
+  //     })
+  //   );
+  // }
+
+  // onRemoveIngredient(ingredient) {
+  //   const index = this.ingredients.value.findIndex(i => ingredient === i);
+  //   this.ingredients.removeAt(index);
+  // }
 
   ngOnInit() {
     this.recipeFormGroup = this.fb.group({
@@ -108,8 +122,8 @@ export class RecipeCreateComponent implements OnInit {
         null,
         Validators.compose([Validators.required, Validators.minLength(10)])
       ],
-      image: [null, Validators.required, mimeType],
-      ingredients: this.fb.array([])
+      image: [null, Validators.required, mimeType]
+      // ingredients: this.fb.array([])
     });
 
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
@@ -122,13 +136,11 @@ export class RecipeCreateComponent implements OnInit {
           this.recipeFormGroup.setValue({
             title: recipeData.title,
             description: recipeData.description,
-            image: recipeData.imgPath,
-            ingredients: []
+            image: recipeData.imgPath
+            // ingredients: []
           });
           this.previewImage = recipeData.imgPath;
-          recipeData.ingredients.forEach(ingredient => {
-            this.addIngredient(ingredient.name);
-          });
+          this.ingredients = [...recipeData.ingredients];
         });
       } else {
         this.mode = 'create';

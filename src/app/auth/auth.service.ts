@@ -5,17 +5,21 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map, first } from 'rxjs/operators';
 import { AlertService } from '../alert/alert.service';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private authStatusListener = new Subject<boolean>();
   private token: string = null;
-  private userId: string;
   private isAuth = false;
+  private init = false;
+
+  private user: { username: string; email: string; id: string };
   constructor(
     private http: HttpClient,
     private router: Router,
-    private alertSerivce: AlertService
+    private alertSerivce: AlertService,
+    private shoppingListService: ShoppingListService
   ) {}
 
   createUser(email, password, username) {
@@ -55,15 +59,25 @@ export class AuthService {
               user: {
                 _id: string;
                 email: string;
+                username: string;
               };
             }
           >res.body;
+
           this.token = body.token;
-          this.userId = body.user._id;
-          this.saveAuthData(this.token, this.userId);
-          this.isAuth = true;
-          this.router.navigate(['/']);
+          this.saveAuthData(this.token);
+
+          this.setUser(
+            {
+              email: body.user.email,
+              id: body.user._id,
+              username: body.user.username
+            },
+            true
+          );
+
           this.authStatusListener.next(true);
+          this.router.navigate(['/']);
           return res;
         },
         err => {
@@ -75,10 +89,8 @@ export class AuthService {
   logout() {
     this.http.delete('http://localhost:3000/users/me/token').subscribe(res => {
       this.removeAuthData();
-      this.userId = null;
       this.token = null;
-      this.isAuth = false;
-      this.authStatusListener.next(false);
+      this.setUser(null, false);
       this.router.navigate(['/']);
     });
   }
@@ -88,7 +100,9 @@ export class AuthService {
   }
 
   getUserId() {
-    return this.userId;
+    if (this.user) {
+      return this.user.id;
+    }
   }
 
   getAuthStatus() {
@@ -99,14 +113,41 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  private saveAuthData(token, id) {
+  getUsername() {
+    if (this.user) {
+      return this.user.username;
+    }
+  }
+
+  private saveAuthData(token) {
     localStorage.setItem('token', token);
-    localStorage.setItem('userId', id);
   }
 
   private removeAuthData() {
     localStorage.removeItem('token');
-    localStorage.removeItem('userId');
+  }
+
+  getUser() {
+    this.http.get<any>('http://localhost:3000/users/me').subscribe(user => {
+      this.setUser(
+        {
+          email: user.email,
+          username: user.username,
+          id: user._id
+        },
+        true
+      );
+      this.init = true;
+    });
+  }
+
+  private setUser(user, isAuth) {
+    this.user = {
+      ...user
+    };
+    this.shoppingListService.fetchShoppingList();
+    this.isAuth = isAuth;
+    this.authStatusListener.next(isAuth);
   }
 
   autoAuth() {
@@ -115,21 +156,18 @@ export class AuthService {
     if (!authData) {
       return;
     }
-
-    console.log(authData);
     this.token = authData.token;
-    this.userId = authData.userId;
-
+    // for initialization
     this.isAuth = true;
-    this.authStatusListener.next(true);
-
-    console.log(this.isAuth);
+    // this.userId = authData.userId;
+    // this.isAuth = true;
+    // this.authStatusListener.next(true);
+    this.getUser();
   }
 
   private getAuthData() {
     const userId = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
-    console.log(token);
 
     if (!token && !userId) {
       return;

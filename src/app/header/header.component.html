@@ -5,19 +5,29 @@
     </div>
     <div class="navig-content">
       <div class="nav-left-content">
-        <ul>
+        <ul class="nav-menu">
           <!-- <li><a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li> -->
-          <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="">Recipes</a></li>
-          <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a *ngIf="isAuth" routerLink="recipes/create"
-              routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Create</a></li>
+          <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a class="nav-link" routerLink="">Recipes</a></li>
+          <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a class="nav-link" *ngIf="isAuth"
+              [routerLink]="['recipes/create']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Create</a></li>
+          <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a class="nav-link" *ngIf="isAuth" [routerLink]="['shoppingList']">Shopping List</a></li>
         </ul>
       </div>
       <div class="nav-right-content">
-        <ul>
-          <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a *ngIf="!isAuth" routerLink="login">Login</a></li>
-          <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a *ngIf="!isAuth" routerLink="signup">Signup</a></li>
-          <li><a *ngIf="isAuth" (click)="onLogout()">Logout</a></li>
+        <ul class="nav-menu">
+          <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a class="nav-link" *ngIf="!isAuth"
+              routerLink="login">Login</a></li>
+          <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a class="nav-link" *ngIf="!isAuth"
+              routerLink="signup">Signup</a></li>
+          <li *ngIf="isAuth && username" class="dropdowntest" appDropdown>
+            <div class="username">{{username}}</div>
+            <ul class="dropdowntest-menu">
+              <li><a routerLink="recipes/create" class="dropdowntest-item">Profile</a></li>
+              <li><a *ngIf="isAuth" (click)="onLogout()" class="dropdowntest-item">Logout</a></li>
+            </ul>
+          </li>
         </ul>
+
       </div>
     </div>
   </div>

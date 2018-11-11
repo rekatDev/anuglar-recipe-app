@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 cool-lg-offset-4 col-md-12 mx-auto">
+      <app-shopping-list [_shoppingList]="shoppingList" (addIngredient)="onAddIngredient($event)" (removeIngredient)="onRemoveIngredient($event)"></app-shopping-list>
+    </div>
+  </div>
+</div>

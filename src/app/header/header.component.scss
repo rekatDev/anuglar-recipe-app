@@ -1,6 +1,10 @@
 .navi {
-  background-image: radial-gradient(circle, #59b931, #4daa27, #419c1d, #358d13, #297f06);
+  // background-image: radial-gradient(circle, #33691E, #4daa27, #419c1d, #358d13, #297f06);
   // height: 5.6rem;
+  // background-color: #1eb880;
+  background-color: #469552;
+  background-color: #499455;
+  // background-color: #33333d;
   display:flex;
   align-items: center;
 
@@ -12,6 +16,71 @@
 
   .logo-content {
     padding: 0 15px;
+    h1 {
+      color: #33333d;
+    }
+  }
+
+  .dropdowntest {
+    position: relative;
+    .username {
+      margin: 0;
+      // line-height: 5.6rem;
+
+      &:hover {
+        cursor:pointer;
+      }
+    }
+
+    &.show .dropdowntest-menu{
+        display: block;
+
+    }
+    &-menu {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .dropdowntest-menu {
+      position: absolute;
+      left: -3rem;
+      display:none;
+      background-color: white;
+      min-width: 15rem;
+      border-radius: 3px;
+      box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+      top: 80%;
+      z-index: 1000;
+      border: 1px solid lightgray;
+
+      li {
+        padding: 1.5rem 1rem;
+        line-height: 1.4rem;
+      }
+
+      &.show {
+        display: block;
+      }
+    }
+    &-item {
+      &,
+      &:link,
+      &:visited {
+        text-decoration: none;
+        color: #33333d;
+        cursor: pointer;
+        display:block;
+        font-size: 1.4rem;
+        font-weight: 400;
+
+        &:hover {
+          color:#499455;
+        }
+      }
+
+
+    }
   }
 
   .navig-content {
@@ -19,26 +88,36 @@
     display: flex;
     justify-content: space-between;
 
-    ul {
+    .nav-right-content {
+      display: flex;
+    }
+
+    .nav-menu {
       margin:0;
       list-style: none;
       display: flex;
 
-      li{
+      &>li{
         margin: 0 1.5rem;
         color:white;
+        line-height: 5.6rem;
+
+        .username {
+          margin: 0;
+          // line-height: 5.6rem;
+        }
 
         &.active {
-          border-bottom: 3px solid black;
-          a {
+          border-bottom: 3px solid #33333d;
+          .nav-link {
             &,
             &:link,
             &:visited {
-            color: black;
+            color:#33333d;
             }
           }
         }
-        a {
+        .nav-link {
           &,
           &:link,
           &:visited {
@@ -47,10 +126,11 @@
             color: white;
             cursor: pointer;
             display:block;
-            height: 5.6rem;
+            // height: 5.6rem;
             font-size: 1.4rem;
             font-weight: 700;
-            line-height: 5.6rem;
+            // line-height: 5.6rem;
+            padding: 0;
           }
       }
     }

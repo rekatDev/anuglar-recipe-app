@@ -23,6 +23,9 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { RecipeCreateComponent } from './recipe/recipe-create/recipe-create.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { AlertComponent } from './alert/alert.component';
+import { DropdownDirective } from './dropdown.directive';
+import { ShoppingListComponent } from './shopping-list/shopping-list/shopping-list.component';
+import { ShoppingListListComponent } from './shopping-list-list/shopping-list-list.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { AlertComponent } from './alert/alert.component';
     LoginComponent,
     SignupComponent,
     RecipeCreateComponent,
-    AlertComponent
+    AlertComponent,
+    DropdownDirective,
+    ShoppingListComponent,
+    ShoppingListListComponent
   ],
   imports: [
     BrowserModule,

@@ -27,20 +27,16 @@ export class RecipeService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  addRecipe(recipe) {
+  addRecipe(title, description, ingredients, image) {
     const recipeData = new FormData();
 
-    recipeData.append('image', recipe.image);
+    recipeData.append('image', image);
     recipeData.append(
       'recipe',
       JSON.stringify({
-        title: recipe.title,
-        description: recipe.description,
-        ingredients: recipe.ingredients.map(ingredient => {
-          return {
-            name: ingredient.name
-          };
-        })
+        title: title,
+        description: description,
+        ingredients: ingredients
       })
     );
 
@@ -80,7 +76,7 @@ export class RecipeService {
         ingredients,
         imgPath: image,
         createdBy: null,
-        creatorId: null,
+        creatorId: null
       };
     }
     this.http

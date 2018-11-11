@@ -1,0 +1,30 @@
+<div class="form__group form__group--flex">
+  <input id="ingredient" class="form__input form__input--with-button" type="text" name="name" placeholder=" "
+    #ingredient />
+  <label for="ingredient" class="form__label">Zutaten</label>
+  <button class="form__input--button" type="button" (click)="onAddIngredient(ingredient)">+</button>
+</div>
+<div>
+  <div *ngFor="let entry of shoppingList" class="ingredient">
+    <p class="ingredient__item">{{entry.name}}</p>
+    <button class="ingredient__button" (click)="removeIngredient.emit(entry)" type="button"><span>x</span></button>
+  </div>
+</div>
+
+
+<!-- <div>
+  <button (click)="onSave()">Save</button>
+</div> -->
+
+<!-- <form [formGroup]="form">
+  <div formArrayName="ingredients">
+    <div *ngFor="let ingredient of ingredients.controls; let i=index">
+
+      <div [formGroup]="ingredient" class="ingredient">
+        <p class="ingredient__item">{{ingredient.get('name').value}}</p>
+        <button class="ingredient__button" (click)="onRemoveIngredient(ingredient)" type="button"><span>x</span></button>
+      </div>
+
+    </div>
+  </div>
+</form> -->
